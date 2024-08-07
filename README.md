@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -10,4 +9,3 @@ Currently, two official plugins are available:
 =======
 # bell-system
 A simple bell system written with react
->>>>>>> 980e80e5102ef327237824f299a66c2e9a4a5e44
