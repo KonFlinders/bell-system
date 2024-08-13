@@ -1,42 +1,95 @@
 #root {
-  max-width: 1280px;
+  max-width: 2500px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: .5rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.Clock {
+  font-size: 6rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Countdown {
+  font-size: 4rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.BellSystemPage {
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  padding: 2em;
+.bellSystemButtonOff {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  height: 6rem;
+  width: 6rem;
+  background-color: red;
+  border-radius: 50%;
 }
 
-.read-the-docs {
-  color: #888;
+.bellSystemButtonOn {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  height: 6rem;
+  width: 6rem;
+  background-color: green;
+  border-radius: 50%;
+  border-radius: 50%;
+}
+
+.SettingsPage {
+  place-items: start;
+  text-align: left;
+  display: flex;
+  width: 95vw;
+  min-height: 90vh;
+}
+
+.Sidebar {
+  background-color: rgb(73, 73, 73);
+  border-radius: 8px;
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 120px;
+  width: 20%;
+  height: 90vh;
+  margin: .5rem;
+}
+
+.Sidebar > li {
+  text-align: center;
+  list-style-type: none;
+}
+
+.Settings {
+  display: flex;
+  flex-flow: row wrap;
+  width: 80%;
+  margin: .5rem;
+}
+
+.SettingsSection {
+  margin: .5rem;
+  display: flex;
+  flex-flow: column wrap;
+  min-width: 400px;
+  max-width: 500px;
+  width: fit-content;
+}
+
+.SettingsList {
+  display: flex;
+  flex-flow: row wrap;
+  width: fit-content;
+}
+
+.SettingsList > li {
+  padding: .5rem;
+  list-style-type: none;
+}
+
+.SettingsSection > h1 {
+  text-align: center;
 }

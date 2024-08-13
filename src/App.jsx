@@ -1,35 +1,46 @@
 import { useState } from 'react'
-import Clock from './components/Clock.jsx'
+import BellSystemPage from './pages/BellSystemPage';
+import SettingsPage from './pages/SettingsPage';
 import './App.css'
 
 function App() {
   
-  const [bellSystem, setBellSystem] = useState(false);
+  const [page, setPage] = useState(0);
   
-  if (bellSystem) {
-    return (
-    <>
-      <header>
-        <h1>
-          <Clock />
-        </h1>
-        <button onClick={() => {setBellSystem(false)}}>
-          Stop Bell System
+  switch (page) {
+    case 0:
+      return (
+      <div className='main'>
+        <button className="bellSystemButtonOff" onClick={()=>setPage(1)}>
+          Start
         </button>
-      </header>
-    </>
+        <h1>
+          Bell system is off
+        </h1>
+        <button onClick={() => setPage(2)}>
+          Settings
+        </button>
+      </div>
     )
-  } else {
-    return (
-      <>
-        <header>
-          <button onClick={()=>{setBellSystem(true)}}>
-            Start Bell System
+    case 1:
+      return (
+        <div className='main'>
+          <button className="bellSystemButtonOn" onClick={() => setPage(0)}>
+            Stop
           </button>
-        </header>
-      </>
-    )
-  }
+          <BellSystemPage />
+        </div>
+      )
+    case 2:
+      return (
+        <>
+          <button onClick={() => setPage(0)}>
+            Home
+          </button>
+          <SettingsPage />
+        </>
+      )
+    }
 }
 
 

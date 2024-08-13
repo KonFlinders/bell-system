@@ -1,12 +1,12 @@
-import React from "react";
 import { useEffect } from "react";
 import useSound from "use-sound";
-import dingDong from "../assets/ding-dong.opus"
-import padZeros from "../functions/padZeros"
+import dingDong from "../assets/ding-dong.opus";
+import padZeros from "../functions/padZeros";
+import schedule from "../data/schedule";
 
 function Bell (props) {
   const date=props.date;
-  const SCHEDULE=props.SCHEDULE;
+  const SCHEDULE=schedule;
   const [bell] = useSound(dingDong);
   const sec = date.getSeconds();
   const day = date.getDay();
