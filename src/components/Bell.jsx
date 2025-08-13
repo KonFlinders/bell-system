@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import useSound from "use-sound";
 import dingDong from "../assets/ding-dong.opus";
+import distantFoghorn from "../assets/distant_foghorn.opus";
 import padZeros from "../functions/padZeros";
 import schedule from "../data/schedule";
 
 function Bell (props) {
   const date=props.date;
   const SCHEDULE=schedule;
-  const [bell] = useSound(dingDong);
+  const [bell] = useSound(distantFoghorn);
   const sec = date.getSeconds();
   const day = date.getDay();
   const dateStr = String(`${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`);
