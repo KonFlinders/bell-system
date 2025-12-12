@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import BellSystemPage from './pages/BellSystemPage';
 import SettingsPage from './pages/SettingsPage';
+import NavigationButton from './components/NavigationButton';
+import BellSystemButton from './components/BellSystemButton';
 import './App.css'
+import Alert from './components/Alert';
+
 
 function App() {
   
@@ -10,33 +14,32 @@ function App() {
   switch (page) {
     case 0:
       return (
-      <div className='main'>
-        <button className="bellSystemButtonOff" onClick={()=>setPage(1)}>
-          Start
-        </button>
-        <h1>
-          Bell system is off
-        </h1>
-        <button onClick={() => setPage(2)}>
-          Settings
-        </button>
-      </div>
-    )
+        <>
+          <Alert></Alert>
+          <div className='main'>
+            <BellSystemButton className="bellSystemButtonRed" onEvent={() => setPage(1)}>Start</BellSystemButton>
+            <h1>
+              Bell system is off
+            </h1>
+            <NavigationButton onEvent={() => setPage(2)}>Settings</NavigationButton>
+          </div>
+        </>
+      )
     case 1:
       return (
-        <div className='main'>
-          <button className="bellSystemButtonOn" onClick={() => setPage(0)}>
-            Stop
-          </button>
-          <BellSystemPage />
-        </div>
+        <>
+          <Alert></Alert>
+          <div className='main'>
+            <BellSystemButton className="bellSystemButtonGreen" onEvent={() => setPage(0)}>Stop</BellSystemButton>
+            <BellSystemPage />
+          </div>
+        </>
       )
     case 2:
       return (
         <>
-          <button onClick={() => setPage(0)}>
-            Home
-          </button>
+          <Alert></Alert>
+          <NavigationButton onEvent={() => setPage(0)}>Home</NavigationButton>
           <SettingsPage />
         </>
       )

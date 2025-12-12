@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Countdown from '../components/Countdown';
-import Bell from '../components/Bell';
 import Clock from '../components/Clock';
 
 function BellSystemPage() {
@@ -15,15 +14,14 @@ function BellSystemPage() {
   }, []);
 
   return (
-      <div className='BellSystemPage'>
-        <div className='Clock'>
-          <Clock date={date}/>
-        </div>
-        <div className='Countdown'>
-          <Countdown date={date}/>
-          <Bell date={date}/>
-        </div>
+    <div className='BellSystemPage'>
+      <div className='Clock'>
+        <Clock date={date}/>
       </div>
+      <div className='Countdown'>
+        <Countdown date={date}/>
+      </div>
+    </div>
   )
 }
 

@@ -1,75 +1,64 @@
-import React from "react";
 import padZeros from "../functions/padZeros";
 import schedule from "../data/schedule";
+import Bell from "./Bell";
 
 
 function Countdown(props) {
   const date = props.date;
-  const SCHEDULE = schedule;
-  const currentTimeMin = calcMin(String(`${padZeros(date.getHours(),2)}${padZeros(date.getMinutes(),2)}`));
-  const day = date.getDay();
-  const daysInWeek = 7;
-  let b = [];
-  const countDown = calcCountDown();
+  const currentDay = date.getDay();
+  const currentHour = date.getHours();
+  const currentMin = date.getMinutes();
+  const currentTimeStamp = String(`${padZeros(currentHour,2)}${padZeros(currentMin,2)}`);
+  const currentTimeMin = calcMin(currentTimeStamp);
+  const numOfWeekDays = Object.keys(schedule.Weekdays).length;
+  const countDown = calcCountDownMin();
 
-  //takes a string in the format hhmm and returns the number of minutes
+  // Takes a string in the format hhmm and returns the total number of minutes
   function calcMin(timeStamp) {
-    let hour = parseFloat(timeStamp.slice(0,2)) * 60;
-    let min = parseFloat(timeStamp.slice(2,4));
+    const hour = parseFloat(timeStamp.slice(0,2)) * 60;
+    const min = parseFloat(timeStamp.slice(2,4));
     return hour + min;
   }
 
-  function calcCountDown() {
-    for (let i = 0; i < daysInWeek; i++) {
-      const a = SCHEDULE.Weekdays[(day+i) % daysInWeek].map(x => calcMin(x));
-      const dayOffset = i * 24 * 60;
-      for (let i = 0; i < a.length; i++) {
-        b.push(a[i] + dayOffset).sort;
-      }
+  // Returns the number of hours and minutes until the next scheduled time
+  function calcCountDownMin() {
+    
+    let scheduleMin = []; // An array of all the scheduled times for the week in minutes from the beginning of today
+    
+    // Populates scheduleMin
+    for (let i = 0; i < numOfWeekDays + 1; i++) {
+      const fromToday = (currentDay + i) % numOfWeekDays // The day of the week counting from today
+      const fromTodayOffset = i * 24 * 60; // The number of minutes to add based on the weekday's distance from today
+      const scheduleDayMin = schedule.Weekdays[fromToday].map(x => calcMin(x)); // The weekday's schedule in minutes from the beginning of the day
+      scheduleDayMin.forEach(element => {
+         scheduleMin.push(element + fromTodayOffset); // Push to scheduleMin
+      });
     }
 
-    for (let i = 0; i < b.length; i++) {
-      if (b[0] < currentTimeMin) {
-        b.shift();
+    scheduleMin.sort; // Sort schedule in ascending order
+
+    // Leaves the next scheduled time as the first item in scheduleMin
+    for (let i = 0; i < scheduleMin.length; i++) {
+      if (scheduleMin[0] < currentTimeMin) {
+        scheduleMin.shift();
       } else {
         break;
       }
     }
 
-    let minTill = b[0] - currentTimeMin;
-    let hours = padZeros(Math.floor(minTill / 60), 2);
-    let min = padZeros((minTill % 60), 2);
+    const totalMinTill = scheduleMin[0] - currentTimeMin;
+    const hoursTill = padZeros(Math.floor(totalMinTill / 60), 2);
+    const minTill = padZeros((totalMinTill % 60), 2);
 
-    return ({
-      hours: hours,
-      min: min,
-    });
-  }
-
-  function dateAdvanceBy (int) {
-    const dateStr = String(`${date.getFullYear()}/${date.getMonth()}/${(parseFloat(date.getDate())+int).toString()}`);
-    return dateStr;
+    return (`${hoursTill}:${minTill}`);
   }
   
-  if (SCHEDULE.ExcludedDates.indexOf(dateAdvanceBy(0)) >= 0) {
-    return (
-      <>
-        Off today
-      </>
-    )
-  } else if (SCHEDULE.ExcludedDates.indexOf(dateAdvanceBy(1)) >= 0 && b[0] > 24 * 60) {
-    return (
-      <>
-        Off tomorrow
-      </>
-    )
-  } else {
-    return (
-      <>
-        {countDown.hours}:{countDown.min}
-      </>
-    )
-  }
+  return (
+    <>
+      {countDown}
+      <Bell countDown={countDown}></Bell>
+    </>
+  )
 }
 
 export default Countdown;

@@ -22,7 +22,7 @@
   flex-direction: column;
 }
 
-.bellSystemButtonOff {
+.bellSystemButtonRed {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -32,7 +32,7 @@
   border-radius: 50%;
 }
 
-.bellSystemButtonOn {
+.bellSystemButtonGreen {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -40,6 +40,15 @@
   width: 6rem;
   background-color: green;
   border-radius: 50%;
+}
+
+.bellSystemButtonDisabled {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 6rem;
+  width: 6rem;
+  background-color: #b14e4e;
   border-radius: 50%;
 }
 
