@@ -1,6 +1,9 @@
 import schedule from "../data/schedule";
+import { useAlertDispatch } from "../context/AlertsContext";
 
-function BellSystemButton({className, onEvent, children}) {
+function BellSystemButton({ className, onEvent, children }) {
+
+  const dispatch = useAlertDispatch();
 
   let scheduleIsSet = false;
   Object.keys(schedule.Weekdays).forEach(key => {
@@ -17,7 +20,12 @@ function BellSystemButton({className, onEvent, children}) {
     )
   } else {
     return (
-      <button className="bellSystemButtonDisabled" onClick={() => alert("No schedule set")}>
+      <button className="bellSystemButtonDisabled" onClick={() => {dispatch({
+        action: "ADD",
+        id: +new Date(),
+        level: "error",
+        text: "The schedule is not set!"
+        })}}>
         Error
       </button>
     )

@@ -1,12 +1,16 @@
-import React from 'react';
 import padZeros from "../functions/padZeros";
 
 function Clock (props) {
+
+  const seconds = props.date.getSeconds();
+  const minutes = props.date.getMinutes();
+  const hours = props.date.getHours();
+
   return (
     <>
-      {padZeros(props.date.getHours(), 2)}:
-      {padZeros(props.date.getMinutes(), 2)}:
-      {padZeros(props.date.getSeconds(), 2)}
+      {padZeros(hours, 2)}:
+      {padZeros(minutes, 2)}:
+      {padZeros(seconds, 2)}
     </>
   )
 }

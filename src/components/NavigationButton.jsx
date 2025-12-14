@@ -1,7 +1,7 @@
 function NavigationButton ({onEvent, children}) {
 
   return (
-    <button className="NavigationButton" onClick={onEvent}>
+    <button className="navigationButton" onClick={onEvent}>
       {children}
     </button>
   )
