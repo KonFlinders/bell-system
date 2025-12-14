@@ -6,26 +6,23 @@ import BellSystemButton from './components/BellSystemButton';
 import AlertProvider from './context/AlertsContext';
 import './App.css'
 
+function Navigation() {
 
+  const [page, setPage] = useState(0);  
 
-function App() {
-  
-  const [page, setPage] = useState(0);
-  
   switch (page) {
     case 0: {
       return (
-        <AlertProvider>
-          <div className='main'>
-            <BellSystemButton className="bellSystemButtonRed" onEvent={() => setPage(1)}>Start</BellSystemButton>
-            <h1>
-              Bell system is off
-            </h1>
-            <NavigationButton onEvent={() => setPage(2)}>Settings</NavigationButton>
-          </div>
-        </AlertProvider>
+        <div className='main'>
+          <BellSystemButton className="bellSystemButtonRed" onEvent={() => setPage(1)}>Start</BellSystemButton>
+          <h1>
+            Bell system is off
+          </h1>
+          <NavigationButton onEvent={() => setPage(2)}>Settings</NavigationButton>
+        </div>
       )
     }
+
     case 1: {
       return (
         <div className='main'>
@@ -34,6 +31,7 @@ function App() {
         </div>
       )
     }
+
     case 2: {
       return (
         <>
@@ -42,7 +40,19 @@ function App() {
         </>
       )
     }
+    
+    default: {
+      throw Error(`Unknown page number: ${page}`)
+    }
   }
+}
+
+function App() {
+  return (
+    <AlertProvider>
+      {Navigation()}
+    </AlertProvider>
+  )
 }
 
 
